@@ -1,20 +1,17 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
-
+from src.tokenize import tokenize
+from src.rpn import rpn
+from src.calculate import calculate
 
 def main() -> None:
-    """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
-    """
+    try:
+        expression = input()
+        tokens = tokenize(expression)
+        rpn_tokens = rpn(tokens)
+        result = calculate(rpn_tokens)
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+        print(result)
+    except Exception as e:
+        print(f'Ошибка: {e}')
 
-    result = power_function(target=target, power=degree)
-
-    print(result)
-
-    print(SAMPLE_CONSTANT)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
